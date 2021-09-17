@@ -33,11 +33,17 @@ class HelloStorefrontResourceRoutePlugin extends AbstractPlugin implements Resou
         return 'hello';
     }
 
+    /**
+     * @return string
+     */
     public function getController(): string
     {
         return 'hello-resource';
     }
 
+    /**
+     * @return string
+     */
     public function getResourceAttributesClassName(): string
     {
         return '';

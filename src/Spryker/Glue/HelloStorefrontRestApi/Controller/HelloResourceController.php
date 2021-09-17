@@ -7,7 +7,7 @@
 
 namespace Spryker\Glue\HelloStorefrontRestApi\Controller;
 
-use Generated\Shared\Transfer\RestHelloAttributesTransfer;
+use Generated\Shared\Transfer\HelloRestAttributesTransfer;
 use Spryker\Glue\Kernel\Controller\AbstractController;
 
 class HelloResourceController extends AbstractController
@@ -22,7 +22,7 @@ class HelloResourceController extends AbstractController
             $this->getFactory()->getResourceBuilder()->createRestResource(
                 'hello',
                 'storefront',
-                (new RestHelloAttributesTransfer())->setMessage('Welcome to the storefront API')
+                (new HelloRestAttributesTransfer())->setMessage('Welcome to the storefront API')
             )
         );
 
