@@ -7,12 +7,25 @@
 
 namespace Spryker\Glue\HelloStorefrontRestApi\Plugin\GlueApplication;
 
+use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRouteCollectionInterface;
+use Spryker\Glue\GlueApplicationExtension\Dependency\Plugin\ResourceRoutePluginInterface as DepreactedResourceRoutePluginInterface;
 use Spryker\Glue\GlueJsonApiExtension\Dependency\Plugin\ResourceRoutePluginInterface;
 use Spryker\Glue\HelloStorefrontRestApi\Controller\HelloResourceController;
 use Spryker\Glue\Kernel\AbstractPlugin;
 
-class HelloStorefrontResourceRoutePlugin extends AbstractPlugin implements ResourceRoutePluginInterface
+class HelloStorefrontResourceRoutePlugin extends AbstractPlugin implements ResourceRoutePluginInterface, DepreactedResourceRoutePluginInterface
 {
+    /**
+     * @return callable
+     */
+    public function getResource(): callable
+    {
+        return [
+            $this->getControllerClass(),
+            $this->getAction(),
+        ];
+    }
+
     /**
      * @return string
      */
@@ -45,4 +58,25 @@ class HelloStorefrontResourceRoutePlugin extends AbstractPlugin implements Resou
         return '/hello';
     }
 
+    public function configure(ResourceRouteCollectionInterface $resourceRouteCollection): ResourceRouteCollectionInterface
+    {
+        $resourceRouteCollection->addGet('get', false);
+
+        return $resourceRouteCollection;
+    }
+
+    public function getResourceType(): string
+    {
+        return 'hello';
+    }
+
+    public function getController(): string
+    {
+        return 'hello-resource';
+    }
+
+    public function getResourceAttributesClassName(): string
+    {
+        return '';
+    }
 }
